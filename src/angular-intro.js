@@ -1,7 +1,7 @@
 var ngIntroDirective = angular.module('angular-intro', []);
 
 
-ngIntroDirective.directive('ngIntroOptions', ['$timeout', function ($timeout) {
+ngIntroDirective.directive('introJs', ['$timeout', function ($timeout) {
 
     return {
         restrict: 'A',
@@ -16,7 +16,7 @@ ngIntroDirective.directive('ngIntroOptions', ['$timeout', function ($timeout) {
             ngIntroAutostart: '&'
         },
         link: function(scope, element, attrs) {
-            scope.ngIntroMethod = function(step) {
+            scope.ngIntroMethod = function(step, options) {
 
                 var intro;
 
@@ -27,7 +27,7 @@ ngIntroDirective.directive('ngIntroOptions', ['$timeout', function ($timeout) {
                     intro = introJs();
                 }
 
-                intro.setOptions(scope.ngIntroOptions);
+                intro.setOptions(scope.ngIntroOptions || options || {});
 
                 if (scope.ngIntroOncomplete) {
                     intro.oncomplete(function() {
